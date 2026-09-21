@@ -1,0 +1,5 @@
+__pycache__/
+/data/*
+!/data/literature_keyword_filter.json
+/_site/
+/.tools/

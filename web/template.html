@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Literature screen</title><link rel="stylesheet" href="style.css"><script src="app.js" defer></script></head>
+<body><main>
+<header><p class="eyebrow">Daily literature watch</p><h1>Literature screen</h1>
+<p class="lead">Recent papers matching your research keywords, gathered from bioRxiv, Europe PMC, and Crossref.</p>
+<p>Last harvest: <time id="updated" datetime="{{TIMESTAMP}}">{{TIMESTAMP}}</time><br>
+Publication/posting dates: {{WINDOW}} (UTC calendar dates).</p>
+<p id="stale" class="warning" hidden>This page has not refreshed for over 36 hours. Check the repository’s Actions tab.</p>
+<p class="note">The 24-hour lookback is approximate. Publication dates can be incomplete or incorrect. First preprint versions, revisions, and explicit notices are flagged; unclassified does not mean newly published.</p>
+<a class="download" href="articles.json" download>Download screened JSON</a></header>
+<section class="controls" aria-label="Filter articles">
+<label>Search titles, abstracts, authors, or keywords<input id="search" type="search" placeholder="Search the screened list…"></label>
+<div class="selects"><label>Source<select id="source"><option value="">All sources</option>{{SOURCE_OPTIONS}}</select></label>
+<label>Publication flag<select id="flag"><option value="">All flags</option>{{FLAG_OPTIONS}}</select></label>
+<label>Keyword bucket<select id="bucket"><option value="">All buckets</option>{{BUCKET_OPTIONS}}</select></label></div>
+<button id="reset" type="button">Reset filters</button></section>
+<p id="count" role="status" aria-live="polite">{{COUNT}} articles</p>
+<noscript><p>Enable JavaScript for search and filters. The full list remains readable below.</p></noscript>
+<section id="articles" aria-label="Screened articles">{{CARDS}}</section>
+<p id="empty" hidden>No articles match these filters.</p>
+<footer>Exact DOI matches are consolidated; different preprint and journal DOIs may remain separate. Expand an article for its source records. This page shows the latest successful refresh.</footer>
+</main></body></html>

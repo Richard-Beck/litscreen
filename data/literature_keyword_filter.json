@@ -1,0 +1,464 @@
+{
+  "keywords": [
+    {
+      "keyword": "migration",
+      "strength": "strong",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "motility",
+      "strength": "strong",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "invasion",
+      "strength": "strong",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "chemotaxis",
+      "strength": "strong",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "polarity",
+      "strength": "strong",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "Rac",
+      "strength": "strong",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "RhoA",
+      "strength": "strong",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "Cdc42",
+      "strength": "strong",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "actin",
+      "strength": "weak",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "cortex",
+      "strength": "weak",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "cytoskeleton",
+      "strength": "weak",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "protrusion",
+      "strength": "strong",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "lamellipodia",
+      "strength": "strong",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "bleb",
+      "strength": "strong",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "adhesion",
+      "strength": "weak",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "traction",
+      "strength": "strong",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "mechanics",
+      "strength": "weak",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "stiffness",
+      "strength": "weak",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "tension",
+      "strength": "weak",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "cell shape",
+      "strength": "strong",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "morphodynamics",
+      "strength": "strong",
+      "bucket": "migration_polarity_mechanics"
+    },
+    {
+      "keyword": "polyploid",
+      "strength": "strong",
+      "bucket": "ploidy_genome_doubling_cell_size"
+    },
+    {
+      "keyword": "tetraploid",
+      "strength": "strong",
+      "bucket": "ploidy_genome_doubling_cell_size"
+    },
+    {
+      "keyword": "whole genome doubling",
+      "strength": "strong",
+      "bucket": "ploidy_genome_doubling_cell_size"
+    },
+    {
+      "keyword": "WGD",
+      "strength": "strong",
+      "bucket": "ploidy_genome_doubling_cell_size"
+    },
+    {
+      "keyword": "aneuploid",
+      "strength": "strong",
+      "bucket": "ploidy_genome_doubling_cell_size"
+    },
+    {
+      "keyword": "genome instability",
+      "strength": "strong",
+      "bucket": "ploidy_genome_doubling_cell_size"
+    },
+    {
+      "keyword": "karyotype",
+      "strength": "strong",
+      "bucket": "ploidy_genome_doubling_cell_size"
+    },
+    {
+      "keyword": "chromosomal instability",
+      "strength": "strong",
+      "bucket": "ploidy_genome_doubling_cell_size"
+    },
+    {
+      "keyword": "CIN",
+      "strength": "weak",
+      "bucket": "ploidy_genome_doubling_cell_size"
+    },
+    {
+      "keyword": "cell size",
+      "strength": "strong",
+      "bucket": "ploidy_genome_doubling_cell_size"
+    },
+    {
+      "keyword": "nuclear size",
+      "strength": "strong",
+      "bucket": "ploidy_genome_doubling_cell_size"
+    },
+    {
+      "keyword": "size scaling",
+      "strength": "strong",
+      "bucket": "ploidy_genome_doubling_cell_size"
+    },
+    {
+      "keyword": "glucose",
+      "strength": "strong",
+      "bucket": "metabolism_nutrient_limitation"
+    },
+    {
+      "keyword": "starvation",
+      "strength": "strong",
+      "bucket": "metabolism_nutrient_limitation"
+    },
+    {
+      "keyword": "nutrient limitation",
+      "strength": "strong",
+      "bucket": "metabolism_nutrient_limitation"
+    },
+    {
+      "keyword": "metabolic",
+      "strength": "weak",
+      "bucket": "metabolism_nutrient_limitation"
+    },
+    {
+      "keyword": "metabolism",
+      "strength": "weak",
+      "bucket": "metabolism_nutrient_limitation"
+    },
+    {
+      "keyword": "glycolysis",
+      "strength": "strong",
+      "bucket": "metabolism_nutrient_limitation"
+    },
+    {
+      "keyword": "mitochondria",
+      "strength": "weak",
+      "bucket": "metabolism_nutrient_limitation"
+    },
+    {
+      "keyword": "respiration",
+      "strength": "weak",
+      "bucket": "metabolism_nutrient_limitation"
+    },
+    {
+      "keyword": "resource limitation",
+      "strength": "strong",
+      "bucket": "metabolism_nutrient_limitation"
+    },
+    {
+      "keyword": "amino acid",
+      "strength": "weak",
+      "bucket": "metabolism_nutrient_limitation"
+    },
+    {
+      "keyword": "lactate",
+      "strength": "weak",
+      "bucket": "metabolism_nutrient_limitation"
+    },
+    {
+      "keyword": "hypoxia",
+      "strength": "strong",
+      "bucket": "metabolism_nutrient_limitation"
+    },
+    {
+      "keyword": "metabolic flux",
+      "strength": "strong",
+      "bucket": "metabolism_nutrient_limitation"
+    },
+    {
+      "keyword": "constraint-based",
+      "strength": "strong",
+      "bucket": "metabolism_nutrient_limitation"
+    },
+    {
+      "keyword": "genome-scale metabolic",
+      "strength": "strong",
+      "bucket": "metabolism_nutrient_limitation"
+    },
+    {
+      "keyword": "GEM",
+      "strength": "weak",
+      "bucket": "metabolism_nutrient_limitation"
+    },
+    {
+      "keyword": "clonal",
+      "strength": "weak",
+      "bucket": "evolutionary_oncology_competition"
+    },
+    {
+      "keyword": "clone",
+      "strength": "weak",
+      "bucket": "evolutionary_oncology_competition"
+    },
+    {
+      "keyword": "competition",
+      "strength": "strong",
+      "bucket": "evolutionary_oncology_competition"
+    },
+    {
+      "keyword": "fitness landscape",
+      "strength": "strong",
+      "bucket": "evolutionary_oncology_competition"
+    },
+    {
+      "keyword": "evolutionary",
+      "strength": "weak",
+      "bucket": "evolutionary_oncology_competition"
+    },
+    {
+      "keyword": "adaptive therapy",
+      "strength": "strong",
+      "bucket": "evolutionary_oncology_competition"
+    },
+    {
+      "keyword": "drug resistance",
+      "strength": "strong",
+      "bucket": "evolutionary_oncology_competition"
+    },
+    {
+      "keyword": "selection",
+      "strength": "weak",
+      "bucket": "evolutionary_oncology_competition"
+    },
+    {
+      "keyword": "lineage",
+      "strength": "weak",
+      "bucket": "evolutionary_oncology_competition"
+    },
+    {
+      "keyword": "barcode",
+      "strength": "strong",
+      "bucket": "evolutionary_oncology_competition"
+    },
+    {
+      "keyword": "barcoding",
+      "strength": "strong",
+      "bucket": "evolutionary_oncology_competition"
+    },
+    {
+      "keyword": "clonal dynamics",
+      "strength": "strong",
+      "bucket": "evolutionary_oncology_competition"
+    },
+    {
+      "keyword": "tumor evolution",
+      "strength": "strong",
+      "bucket": "evolutionary_oncology_competition"
+    },
+    {
+      "keyword": "phenotypic plasticity",
+      "strength": "strong",
+      "bucket": "evolutionary_oncology_competition"
+    },
+    {
+      "keyword": "live-cell imaging",
+      "strength": "strong",
+      "bucket": "imaging_quantitative_cell_biology"
+    },
+    {
+      "keyword": "time-lapse",
+      "strength": "strong",
+      "bucket": "imaging_quantitative_cell_biology"
+    },
+    {
+      "keyword": "single-cell",
+      "strength": "weak",
+      "bucket": "imaging_quantitative_cell_biology"
+    },
+    {
+      "keyword": "cell tracking",
+      "strength": "strong",
+      "bucket": "imaging_quantitative_cell_biology"
+    },
+    {
+      "keyword": "microscopy",
+      "strength": "weak",
+      "bucket": "imaging_quantitative_cell_biology"
+    },
+    {
+      "keyword": "image analysis",
+      "strength": "strong",
+      "bucket": "imaging_quantitative_cell_biology"
+    },
+    {
+      "keyword": "segmentation",
+      "strength": "weak",
+      "bucket": "imaging_quantitative_cell_biology"
+    },
+    {
+      "keyword": "morphology",
+      "strength": "weak",
+      "bucket": "imaging_quantitative_cell_biology"
+    },
+    {
+      "keyword": "spatial",
+      "strength": "weak",
+      "bucket": "imaging_quantitative_cell_biology"
+    },
+    {
+      "keyword": "biosensor",
+      "strength": "strong",
+      "bucket": "imaging_quantitative_cell_biology"
+    },
+    {
+      "keyword": "FRET",
+      "strength": "strong",
+      "bucket": "imaging_quantitative_cell_biology"
+    },
+    {
+      "keyword": "optogenetic",
+      "strength": "strong",
+      "bucket": "imaging_quantitative_cell_biology"
+    },
+    {
+      "keyword": "cellular Potts",
+      "strength": "strong",
+      "bucket": "modelling"
+    },
+    {
+      "keyword": "CPM",
+      "strength": "weak",
+      "bucket": "modelling"
+    },
+    {
+      "keyword": "phase-field",
+      "strength": "strong",
+      "bucket": "modelling"
+    },
+    {
+      "keyword": "agent-based",
+      "strength": "strong",
+      "bucket": "modelling"
+    },
+    {
+      "keyword": "mechanochemical",
+      "strength": "strong",
+      "bucket": "modelling"
+    },
+    {
+      "keyword": "reaction-diffusion",
+      "strength": "strong",
+      "bucket": "modelling"
+    },
+    {
+      "keyword": "active matter",
+      "strength": "strong",
+      "bucket": "modelling"
+    },
+    {
+      "keyword": "vertex model",
+      "strength": "strong",
+      "bucket": "modelling"
+    },
+    {
+      "keyword": "cell migration model",
+      "strength": "strong",
+      "bucket": "modelling"
+    },
+    {
+      "keyword": "multiscale model",
+      "strength": "strong",
+      "bucket": "modelling"
+    },
+    {
+      "keyword": "RPE1",
+      "strength": "strong",
+      "bucket": "systems_cell_lines"
+    },
+    {
+      "keyword": "MCF10A",
+      "strength": "strong",
+      "bucket": "systems_cell_lines"
+    },
+    {
+      "keyword": "HeLa",
+      "strength": "weak",
+      "bucket": "systems_cell_lines"
+    },
+    {
+      "keyword": "RKO",
+      "strength": "strong",
+      "bucket": "systems_cell_lines"
+    },
+    {
+      "keyword": "SUM159",
+      "strength": "strong",
+      "bucket": "systems_cell_lines"
+    },
+    {
+      "keyword": "SNU668",
+      "strength": "strong",
+      "bucket": "systems_cell_lines"
+    },
+    {
+      "keyword": "diploid",
+      "strength": "strong",
+      "bucket": "systems_cell_lines"
+    }
+  ]
+}
