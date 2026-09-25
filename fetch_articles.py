@@ -16,6 +16,16 @@ EPMC = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
 CROSSREF = "https://api.crossref.org/works"
 
 
+def validate_europe_pmc(payload):
+    try:
+        if int(payload["hitCount"]) < 0:
+            raise ValueError("negative hitCount")
+        if not isinstance(payload["resultList"]["result"], list):
+            raise ValueError("result is not a list")
+    except (KeyError, TypeError, ValueError) as exc:
+        raise ValueError(f"Invalid Europe PMC response: {str(payload)[:500]}") from exc
+
+
 def fetch_europe_pmc(start, end):
     cursor = "*"
     articles = {}
@@ -25,7 +35,7 @@ def fetch_europe_pmc(start, end):
             "query": f"FIRST_PDATE:[{start} TO {end}]",
             "format": "json", "resultType": "core", "pageSize": 1000,
             "cursorMark": cursor,
-        }))
+        }), validate=validate_europe_pmc)
         total = int(payload["hitCount"])
         page = payload["resultList"]["result"]
         for item in page:
