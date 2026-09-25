@@ -12,7 +12,9 @@ Daily refresh is scheduled for **03:00 America/New_York** (Eastern time,
 automatically following daylight saving time). Pushes to `main` and the workflow's
 **Run workflow** button also trigger a fresh build. GitHub can delay scheduled
 runs. The page displays the actual last harvest time and a stale-data notice
-after 36 hours. Failed harvests do not replace the last successful deployment.
+after 36 hours. If one source fails, completed sources still publish; the page
+lists the missing source and the JSON records its error. If every source fails,
+the job fails and the last deployment remains available.
 
 In repository **Settings → Pages**, the publishing source must be **GitHub
 Actions**. The workflow uses the built-in token and needs no API keys. Its
@@ -80,7 +82,8 @@ or posting dates, not when a record was added to an index.
 All pages are retrieved, with up to six attempts per request for transient
 network failures, invalid JSON, and invalid bioRxiv/Europe PMC response envelopes.
 Retries stay on the failed page, with waits of 5, 10, 20, 40, and 60 seconds;
-exhausted retries fail the harvest and preserve the last complete deployment.
+exhausted retries mark that source as failed. Only fully harvested source
+results are included; partial pages from a failed source are discarded.
 Each source is
 fetched concurrently with the others, with sequential requests within a source.
 Duplicates are removed within a source by its identifier (DOI/version for

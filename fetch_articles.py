@@ -129,6 +129,25 @@ FETCHERS = {"biorxiv": fetch_biorxiv_normalized, "europe_pmc": fetch_europe_pmc,
             "crossref": fetch_crossref}
 
 
+def harvest_sources(sources, start, end):
+    """Keep only complete source results; report source failures separately."""
+    results = {}
+    failed_sources = {}
+    with ThreadPoolExecutor(max_workers=len(sources)) as pool:
+        futures = {pool.submit(FETCHERS[source], start, end): source for source in sources}
+        for future in as_completed(futures):
+            source = futures[future]
+            try:
+                results[source] = future.result()
+            except Exception as exc:
+                failed_sources[source] = str(exc)
+                print(f"WARNING: {source} harvest failed: {exc}", file=sys.stderr)
+    if not results:
+        raise RuntimeError("All requested sources failed; no page will be published. "
+                           + "; ".join(f"{source}: {failed_sources[source]}" for source in sources))
+    return results, failed_sources
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--hours", type=int, default=24)
@@ -143,16 +162,8 @@ def main():
     sources = list(dict.fromkeys(args.sources))
     print(f"Querying inclusive dates {start} through {end}; the {args.hours}-hour cutoff is approximate.", file=sys.stderr)
     try:
-        results = {}
-        with ThreadPoolExecutor(max_workers=len(sources)) as pool:
-            futures = {pool.submit(FETCHERS[source], start, end): source for source in sources}
-            for future in as_completed(futures):
-                source = futures[future]
-                try:
-                    results[source] = future.result()
-                except Exception as exc:
-                    raise RuntimeError(f"{source}: {exc}") from exc
-        articles = [article for source in sources for article in results[source]]
+        results, failed_sources = harvest_sources(sources, start, end)
+        articles = [article for source in sources for article in results.get(source, [])]
         result = {
             "requested_at_utc": now.isoformat(), "requested_since_utc": since.isoformat(),
             "query_start_date": start, "query_end_date": end,
@@ -162,7 +173,9 @@ def main():
                                    "crossref": "from-pub-date/until-pub-date (journal articles, all subjects)"},
             "keywords_note": "Europe PMC keywords are retained when present. Crossref subjects and bioRxiv categories are separate from keywords. Abstracts may contain source markup.",
             "deduplication_note": "Source records are retained separately; record_count is not a unique-paper count.",
-            "source_counts": {source: len(results[source]) for source in sources},
+            "requested_sources": sources,
+            "source_counts": {source: len(results[source]) for source in sources if source in results},
+            "failed_sources": {source: failed_sources[source] for source in sources if source in failed_sources},
             "record_count": len(articles), "articles": articles,
         }
         args.output.parent.mkdir(parents=True, exist_ok=True)
@@ -172,7 +185,8 @@ def main():
     except (OSError, ValueError, KeyError, TypeError, RuntimeError) as exc:
         print(f"Harvest failed; previous output retained: {exc}", file=sys.stderr)
         return 1
-    print(f"Saved {len(articles)} records to {args.output}; counts: {result['source_counts']}")
+    print(f"Saved {len(articles)} records to {args.output}; counts: {result['source_counts']}; "
+          f"failed sources: {list(result['failed_sources'])}")
     return 0
 
 

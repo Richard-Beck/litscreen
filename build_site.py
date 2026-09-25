@@ -54,6 +54,7 @@ def card(article):
 def render(data):
     articles = data["articles"]
     harvest = data.get("input_metadata", {}).get("harvest_metadata", {})
+    failed_sources = harvest.get("failed_sources", {})
     timestamp = harvest.get("requested_at_utc", data["prepared_at_utc"])
     sources = sorted({s for a in articles for s in a.get("sources", [])})
     buckets = sorted({b for a in articles for r in a.get("source_records", [a])
@@ -63,6 +64,10 @@ def render(data):
     template = Path("web/template.html").read_text(encoding="utf-8")
     values = {
         "COUNT": str(len(articles)), "TIMESTAMP": escape(timestamp),
+        "SOURCE_WARNING": ("<p class=\"warning\" role=\"status\">Incomplete refresh: "
+                           + escape(", ".join(failed_sources))
+                           + " could not be harvested. These articles are absent from this page and its JSON download. "
+                           + "See the harvest metadata in the JSON for errors.</p>") if failed_sources else "",
         "WINDOW": escape(f"{harvest.get('query_start_date', '?')} – {harvest.get('query_end_date', '?')}"),
         "SOURCE_OPTIONS": options(sources), "FLAG_OPTIONS": options(LABELS),
         "BUCKET_OPTIONS": options(buckets),
