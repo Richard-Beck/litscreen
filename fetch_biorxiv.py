@@ -3,6 +3,7 @@
 import argparse
 from datetime import datetime, timedelta, timezone
 import json
+from http.client import HTTPException
 from pathlib import Path
 import sys
 import time
@@ -14,19 +15,37 @@ API = "https://api.biorxiv.org/details/biorxiv"
 FIELDS = ("doi", "title", "authors", "date", "version", "category", "abstract")
 
 
-def get_page(url):
-    """Retry temporary network/server failures, with a timeout per request."""
-    for attempt in range(3):
+def get_page(url, validate=None):
+    """Retry network failures and invalid API responses at the same page URL."""
+    attempts = 6
+    for attempt in range(attempts):
         try:
             request = Request(url, headers={"User-Agent": "litscreen-dev/0.1"})
             with urlopen(request, timeout=30) as response:
-                return json.load(response)
-        except (URLError, TimeoutError) as exc:
+                payload = json.load(response)
+            if validate is not None:
+                validate(payload)
+            return payload
+        except (URLError, TimeoutError, ConnectionError, HTTPException, ValueError) as exc:
             if isinstance(exc, HTTPError) and exc.code != 429 and exc.code < 500:
                 raise
-            if attempt == 2:
-                raise
-            time.sleep(2 ** (attempt + 1))
+            if attempt == attempts - 1:
+                raise ValueError(f"Request failed after {attempts} attempts at {url}: {exc}") from exc
+            delay = min(5 * 2 ** attempt, 60)
+            print(f"Request attempt {attempt + 1}/{attempts} failed at {url}: {exc}; "
+                  f"retrying in {delay}s", file=sys.stderr)
+            time.sleep(delay)
+
+
+def validate_biorxiv(payload):
+    try:
+        message = payload["messages"][0]
+        if message.get("status") != "ok" or int(message["total"]) < 0:
+            raise ValueError("invalid status or total")
+        if not isinstance(payload["collection"], list):
+            raise ValueError("collection is not a list")
+    except (KeyError, TypeError, IndexError, ValueError) as exc:
+        raise ValueError(f"Invalid bioRxiv response: {str(payload)[:500]}") from exc
 
 
 def fetch_articles(start_date, end_date):
@@ -35,7 +54,7 @@ def fetch_articles(start_date, end_date):
     cursor = 0
     while True:
         url = f"{API}/{start_date}/{end_date}/{cursor}"
-        payload = get_page(url)
+        payload = get_page(url, validate=validate_biorxiv)
         messages = payload.get("messages", [])
         if not messages or messages[0].get("status") != "ok":
             raise ValueError(f"bioRxiv API error at {url}: {messages!r}")

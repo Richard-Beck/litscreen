@@ -8,8 +8,8 @@ Repository: https://github.com/Richard-Beck/litscreen
 
 Site: https://richard-beck.github.io/litscreen/
 
-Daily refresh is scheduled for **13:23 UTC** (09:23 Eastern during daylight
-saving time, 08:23 during standard time). Pushes to `main` and the workflow's
+Daily refresh is scheduled for **03:00 America/New_York** (Eastern time,
+automatically following daylight saving time). Pushes to `main` and the workflow's
 **Run workflow** button also trigger a fresh build. GitHub can delay scheduled
 runs. The page displays the actual last harvest time and a stale-data notice
 after 36 hours. Failed harvests do not replace the last successful deployment.
@@ -77,7 +77,11 @@ Crossref print and online dates are also saved. Europe PMC can supply inferred
 dates when publication metadata is incomplete. These queries target publication
 or posting dates, not when a record was added to an index.
 
-All pages are retrieved, with retries for transient failures. Each source is
+All pages are retrieved, with up to six attempts per request for transient
+network failures, invalid JSON, and invalid bioRxiv/Europe PMC response envelopes.
+Retries stay on the failed page, with waits of 5, 10, 20, 40, and 60 seconds;
+exhausted retries fail the harvest and preserve the last complete deployment.
+Each source is
 fetched concurrently with the others, with sequential requests within a source.
 Duplicates are removed within a source by its identifier (DOI/version for
 bioRxiv); overlaps across sources remain separate for development/comparison.
